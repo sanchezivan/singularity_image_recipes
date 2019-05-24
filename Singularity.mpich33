@@ -34,6 +34,9 @@ From: centos
    cd ..
    rm -rf mpich-3.2.1
 
+%environment
+   export PATH=/usr/local/mpich/install/bin/:${PATH}
+   export LD_LIBRARY_PATH=/usr/local/mpich/install/lib/:${LD_LIBRARY_PATH}
 
 %runscript
    /mpitestapp/pi
