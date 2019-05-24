@@ -11,7 +11,10 @@ From: centos
    yum update -y
    yum groupinstall -y "Development Tools"
    yum install -y gcc gcc-c++ wget
-   
+   yum install -y epel-release
+   yum update -y
+   pip install numpy
+
    # install MPICH
    MPICH_VERSION=3.3
    mkdir /mpich
