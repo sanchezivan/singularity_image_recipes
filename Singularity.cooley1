@@ -13,7 +13,7 @@ From: centos
    mkdir ${SINGULARITY_ROOTFS}/myapp
    # copy the hello world example from the github to 
    # the app directory
-   
+   # cp example_codes/hello_world.cpp ${SINGULARITY_ROOTFS}/myapp/
 
 %post
    # post is run after entering the container env. 
@@ -28,11 +28,11 @@ From: centos
    cd /myapp
    
    # build
-   g++ -o 
+   # g++ -o hello_world hello_world.cpp
 
 %runscript
    # run script
-   /myapp/hello_world
+   # /myapp/hello_world
 
 %environment
    # can define runtime environment variables here
