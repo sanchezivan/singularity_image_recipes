@@ -23,7 +23,9 @@ From: centos
    yum update -y
    yum groupinstall -y "Development Tools"
    yum install -y gcc g++
-   
+   yum install sudo -y
+
+
    # enter directory where source file was copied
    cd /myapp
    
