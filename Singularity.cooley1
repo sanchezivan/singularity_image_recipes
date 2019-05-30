@@ -27,7 +27,7 @@ From: centos
    yum install sudo -y
     
     # This installs CMake 3.12.3 as well as command wget
-   yum install ncurses-devel
+   yum install -y ncurses-devel
    yum install -y wget
    wget https://cmake.org/files/v3.12/cmake-3.12.3.tar.gz
    tar zxvf cmake-3.*
