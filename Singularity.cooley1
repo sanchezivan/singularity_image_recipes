@@ -15,7 +15,7 @@ From: centos
    # the app directory
    # cp example_codes/hello_world.cpp ${SINGULARITY_ROOTFS}/myapp/
    
-   #This installs CMake 3.12.3 as well as command wget
+   # This installs CMake 3.12.3 as well as command wget
    yum install -y wget
    wget https://cmake.org/files/v3.12/cmake-3.12.3.tar.gz
    tar zxvf cmake-3.*
