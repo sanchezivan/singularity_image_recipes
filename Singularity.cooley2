@@ -27,6 +27,7 @@ From: centos
    yum install sudo -y
     
     # This installs CMake 3.12.3 as well as command wget
+   yum install ncurses-devel
    yum install -y wget
    wget https://cmake.org/files/v3.12/cmake-3.12.3.tar.gz
    tar zxvf cmake-3.*
@@ -35,7 +36,15 @@ From: centos
    make -j$(nproc)
    make install
 
-
+   # Installs VTK
+   git clone git://vtk.org/VTK.git VTK
+   mkdir VTK-build
+   cd VTK-build
+   yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
+   sudo yum install -y libXt-devel
+   cmake  -DVTK_BUILD_TESTING:STRING=OFF /root/VTK
+   make
+   
 
    # enter directory where source file was copied
    cd /myapp
