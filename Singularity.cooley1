@@ -42,6 +42,7 @@ From: centos
    cd VTK-build
    yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
    sudo yum install -y libXt-devel
+   yum install -y freeglut-devel
    cmake  -DVTK_BUILD_TESTING:STRING=OFF ../VTK
    make
    
