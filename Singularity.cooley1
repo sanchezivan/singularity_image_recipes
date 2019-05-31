@@ -46,6 +46,21 @@ From: centos
    cmake  -DVTK_BUILD_TESTING:STRING=OFF ../VTK
    make
    
+   # Installing MPICH 3.2
+   yum install -y mpich-3.2
+   yum install -y mlocate
+   sudo updatedb
+   echo "PATH=/usr/lib64/mpich-3.2/bin/:$PATH ; export PATH" >> $HOME/.bashrc
+   . .bashrc
+   yum install -y man
+   sudo yum install -y tcl.x86_64 tcl-devel.x86_64
+   wget https://sourceforge.net/projects/modules/files/Modules/modules-4.2.4/modules-4.2.4.tar.gz
+   tar xf modules-4.2.4.tar.gz
+   cd modules-4.2.4
+   ./configure
+   sudo make && sudo make install
+   module use /etc/modulefiles/  
+   module load mpi/mpich-3.2-x86_64
 
    # enter directory where source file was copied
    cd /myapp
