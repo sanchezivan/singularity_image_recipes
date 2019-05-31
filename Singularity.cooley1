@@ -51,7 +51,6 @@ From: centos
    yum install -y mpich-3.2-devel
    yum install -y mlocate
    sudo updatedb
-   echo "PATH=/usr/lib64/mpich-3.2/bin/:$PATH ; export PATH" >> $HOME/.bashrc #remove from here and bashrc
    yum install -y man
    sudo yum install -y tcl.x86_64 tcl-devel.x86_64
    wget https://sourceforge.net/projects/modules/files/Modules/modules-4.2.4/modules-4.2.4.tar.gz
@@ -91,10 +90,12 @@ From: centos
    # Installing SENSEI
    git clone https://github.com/Kitware/sensei.git
    cd sensei/
+   echo "set_property(TARGET parallel3d PROPERTY C_STANDARD 99)" >> CMakeLists.txt
    mkdir build
    cd build/
    cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=/root/VTK-build -DADIOS_DIR=/root/adios-1.13.1/build  ..
-
+   make 
+   make install
 
    yum install -y vim
    # enter directory where source file was copied
