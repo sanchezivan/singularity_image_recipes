@@ -88,8 +88,14 @@ From: centos
    make
    make install
    
-   
- 
+   # Installing SENSEI
+   git clone https://github.com/Kitware/sensei.git
+   cd sensei/
+   mkdir build
+   cd build/
+   cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=/root/VTK-build -DADIOS_DIR=/root/adios-1.13.1/build  ..
+
+
    yum install -y vim
    # enter directory where source file was copied
    cd /myapp
