@@ -59,9 +59,11 @@ From: centos
    cd modules-4.2.4
    ./configure
    sudo make && sudo make install
+   echo "source PREFIX/init/bash" >> $HOME/.bashrc
+   ln -s PREFIX/init/profile.sh /etc/profile.d/modules.sh
    module use /etc/modulefiles/  
    module load mpi/mpich-3.2-x86_64
-
+ 
    # enter directory where source file was copied
    cd /myapp
    
