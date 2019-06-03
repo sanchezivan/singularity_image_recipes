@@ -61,7 +61,7 @@ From: centos
    echo "source ~/modules-4.2.4/init/bash" >> $HOME/.bashrc
    mv /etc/profile.d/modules.sh /etc/profile.d/modules.sh.old
    ln -s ~/modules-4.2.4/init/profile.sh /etc/profile.d/modules.sh
-   source ~/modules-4.2.4/init/bash
+   source ~/modules-4.2.4/init/sh
    module use /etc/modulefiles/  
    module load mpi/mpich-3.2-x86_64
    
