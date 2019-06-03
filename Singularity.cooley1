@@ -47,6 +47,7 @@ From: centos
    cmake  -DVTK_BUILD_TESTING:STRING=OFF ../VTK
    make
    cd ..
+   cd ..
    
    # Installing MPICH 3.2
    yum install -y mpich-3.2-devel
