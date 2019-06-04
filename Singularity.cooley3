@@ -39,9 +39,6 @@ From: centos
 
    # Installs VTK
    git clone git://vtk.org/VTK.git VTK
-   cd VTK
-   git checkout v8.2.0
-   cd ..
    mkdir VTK-build
    cd VTK-build
    yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
