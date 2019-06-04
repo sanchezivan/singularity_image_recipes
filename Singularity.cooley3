@@ -42,28 +42,28 @@ From: centos
    mkdir VTK-build
    cd VTK-build
    yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
-   sudo yum install -y libXt-devel
+   yum install -y libXt-devel
    yum install -y freeglut-devel
    cmake  -DVTK_BUILD_TESTING:STRING=OFF ../VTK
    make
    
-   # Installing MPICH 3.2
-   yum install -y mpich-3.2-devel
-   yum install -y mlocate
-   sudo updatedb
-   yum install -y man
-   sudo yum install -y tcl.x86_64 tcl-devel.x86_64
-   wget https://sourceforge.net/projects/modules/files/Modules/modules-4.2.4/modules-4.2.4.tar.gz
-   tar xf modules-4.2.4.tar.gz
-   cd modules-4.2.4
-   ./configure
-   sudo make && sudo make install
-   echo "source ~/modules-4.2.4/init/bash" >> $HOME/.bashrc
-   mv /etc/profile.d/modules.sh /etc/profile.d/modules.sh.old
-   ln -s ~/modules-4.2.4/init/profile.sh /etc/profile.d/modules.sh
-   source ~/modules-4.2.4/init/bash
-   module use /etc/modulefiles/  
-   module load mpi/mpich-3.2-x86_64
+   # install MPICH
+   wget -q http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz
+   tar xf mpich-3.2.1.tar.gz
+   rm mpich-3.2.1.tar.gz
+   cd mpich-3.2.1
+   # disable the addition of the RPATH to compiled executables
+   # this allows us to override the MPI libraries to use those
+   # found via LD_LIBRARY_PATH
+   ./configure --prefix=/usr/local/mpich/install --disable-wrapper-rpath
+   make -j 4 install
+   # add to local environment to build pi.c
+   export PATH=$PATH:/usr/local/mpich//install/bin
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/mpich//install/lib
+   env | sort
+   cd ..
+   rm -rf mpich-3.2.1
+    
    
    #Installing ADIOS
    wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
@@ -115,4 +115,7 @@ From: centos
    # or 'exec' or 'run' but will not be set during
    # the previous 'post' section of the recipe file
    # so, if you need them, define them there as well
+   
+   export PATH=/usr/local/mpich/install/bin/:${PATH}
+   export LD_LIBRARY_PATH=/usr/local/mpich/install/lib/:${LD_LIBRARY_PATH}
    export PATH=$PATH:/myapp
