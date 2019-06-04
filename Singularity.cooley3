@@ -79,6 +79,7 @@ From: centos
    wget https://github.com/michaelrsweet/mxml/releases/download/release-2.9/mxml-2.9.tar.gz
    tar xf mxml-2.9.tar.gz
    cd mxml-2.9
+   ./configure
    make
    make install
    cd adios -1.13.0
