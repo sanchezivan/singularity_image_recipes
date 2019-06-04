@@ -61,6 +61,7 @@ From: centos
    make install
    echo "source ~/modules-4.2.4/init/bash" >> $HOME/.bashrc
    mv /etc/profile.d/modules.sh /etc/profile.d/modules.sh.old
+   chmod -x ~/modules-4.2.4/init
    ls -la ~/modules-4.2.4/init
    source ~/modules-4.2.4/init/sh
    module use /etc/modulefiles/  
