@@ -1,0 +1,45 @@
+Bootstrap: docker
+From: centos
+
+%setup
+   # setup is run after the base 'centos' image is
+   # downloaded and upacked but before entering the 
+   # container environment
+   
+   # this is the path on the local system to 
+   # what will become your container's root directory
+   echo ${SINGULARITY_ROOTFS}
+   # create a directory for your application
+   mkdir ${SINGULARITY_ROOTFS}/myapp
+   # copy the hello world example from the github to 
+   # the app directory
+   # cp /hello_world.cpp ${SINGULARITY_ROOTFS}/myapp/
+   mkdir ${SINGULARITY_ROOTFS}/config
+   cp adiosconfig ${SINGULARITY_ROOTFS}/config/adiosconfig
+ 
+ %post
+   # post is run after entering the container env. 
+   
+   # need to install some development tools to
+   # build our code
+   
+   yum install environment-modules -y
+   rpm -qi environment-modules
+   
+   yum install -y mpich-3.2-devel
+   yum install -y mlocate
+   updatedb
+   yum install -y man
+   yum install -y tcl.x86_64 tcl-devel.x86_64
+   
+   %runscript
+   # run script
+   # /myapp/hello_world
+
+%environment
+   # can define runtime environment variables here
+   # these vars will be set during calls to 'shell'
+   # or 'exec' or 'run' but will not be set during
+   # the previous 'post' section of the recipe file
+   # so, if you need them, define them there as well
+   export PATH=$PATH:/myapp
