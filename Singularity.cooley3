@@ -39,6 +39,9 @@ From: centos
 
    # Installs VTK
    git clone git://vtk.org/VTK.git VTK
+   cd VTK
+   git checkout v8.2.0
+   cd ..
    mkdir VTK-build
    cd VTK-build
    yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
@@ -82,7 +85,7 @@ From: centos
    ./configure
    make
    make install
-   cd adios -1.13.0
+   cd adios-1.13.0
    mkdir build
    cd build
    ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
@@ -92,10 +95,10 @@ From: centos
    # Installing SENSEI
    git clone https://github.com/Kitware/sensei.git
    cd sensei/
-   echo "set_property(TARGET parallel3d PROPERTY C_STANDARD 99)" >> CMakeLists.txt
+   git checkout 2.1.1
    mkdir build
    cd build/
-   cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=/root/VTK-build -DADIOS_DIR=/root/adios-1.13.1/build  ..
+   cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=/root/VTK-build -DADIOS_DIR=/root/adios-1.13.1/build -DENABLE_libIS=OFF -DENABLE_PARALLEL3D=OFF -DENABLE_OSCILLATORS=ON -DENABLES_MANDEBROT=OFF -DENABLE_VORTEX=OFF ..
    make 
    make install
 
