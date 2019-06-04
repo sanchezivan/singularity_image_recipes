@@ -61,44 +61,44 @@ From: centos
    make install
    echo "source ~/modules-4.2.4/init/bash" >> $HOME/.bashrc
    mv /etc/profile.d/modules.sh /etc/profile.d/modules.sh.old
-   chmod -x ~/modules-4.2.4/init
-   ls -la ~/modules-4.2.4/init
-   source ~/modules-4.2.4/init/sh
-   module use /etc/modulefiles/  
-   module load mpi/mpich-3.2-x86_64
+   # chmod -x ~/modules-4.2.4/init
+   # ls -la ~/modules-4.2.4/init
+   # source ~/modules-4.2.4/init/sh
+   # module use /etc/modulefiles/  
+   # module load mpi/mpich-3.2-x86_64
    
    #Installing ADIOS
-   wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
-   tar zxf adios-1.13.1.tar.gz
-   cd adios-1.13.1
-   wget http://ftp.gnu.org/gnu/automake/automake-1.13.tar.gz
-   tar xf automake-1.13.tar.gz
-   cd automake-1.13
-   ./configure
-   make
-   make install
+   # wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
+   # tar zxf adios-1.13.1.tar.gz
+   # cd adios-1.13.1
+   # wget http://ftp.gnu.org/gnu/automake/automake-1.13.tar.gz
+   # tar xf automake-1.13.tar.gz
+   # cd automake-1.13
+   # ./configure
+   # make
+   # make install
    # This installs MXML (needed to complete ADIOS installation)
-   wget https://github.com/michaelrsweet/mxml/releases/download/release-2.9/mxml-2.9.tar.gz
-   tar xf mxml-2.9.tar.gz
-   cd mxml-2.9
-   make
-   make install
-   cd adios -1.13.0
-   mkdir build
-   cd build
-   ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
-   make
-   make install
+   # wget https://github.com/michaelrsweet/mxml/releases/download/release-2.9/mxml-2.9.tar.gz
+   # tar xf mxml-2.9.tar.gz
+   # cd mxml-2.9
+   # make
+   # make install
+   # cd adios -1.13.0
+   # mkdir build
+   # cd build
+   # ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
+   # make
+   # make install
    
    # Installing SENSEI
-   git clone https://github.com/Kitware/sensei.git
-   cd sensei/
-   echo "set_property(TARGET parallel3d PROPERTY C_STANDARD 99)" >> CMakeLists.txt
-   mkdir build
-   cd build/
-   cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=/root/VTK-build -DADIOS_DIR=/root/adios-1.13.1/build  ..
-   make 
-   make install
+   # git clone https://github.com/Kitware/sensei.git
+   # cd sensei/
+   # echo "set_property(TARGET parallel3d PROPERTY C_STANDARD 99)" >> CMakeLists.txt
+   # mkdir build
+   # cd build/
+   # cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=/root/VTK-build -DADIOS_DIR=/root/adios-1.13.1/build  ..
+   # make 
+   # make install
 
    yum install -y vim
    # enter directory where source file was copied
