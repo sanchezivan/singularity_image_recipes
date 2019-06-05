@@ -82,7 +82,7 @@ From: centos
    ./configure
    make
    make install
-   cd adios-1.13.1
+   cd ..
    mkdir build
    cd build
    ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
