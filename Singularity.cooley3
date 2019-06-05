@@ -85,8 +85,8 @@ From: centos
    cd ..
    mkdir build
    cd build
-   make distclean
    ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
+   make distclean
    make
    make install
    
