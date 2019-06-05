@@ -75,6 +75,8 @@ From: centos
    ./configure
    make
    make install
+   cd ..
+   
    # This installs MXML (needed to complete ADIOS installation)
    wget https://github.com/michaelrsweet/mxml/releases/download/release-2.9/mxml-2.9.tar.gz
    tar xf mxml-2.9.tar.gz
@@ -86,7 +88,6 @@ From: centos
    mkdir build
    cd build
    ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
-   make distclean
    make
    make install
    
