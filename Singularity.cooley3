@@ -97,6 +97,7 @@ From: centos
    # Installing SENSEI
    git clone https://github.com/Kitware/sensei.git
    cd sensei/
+   echo "set_property(TARGET parallel3d PROPERTY C_STANDARD 99)" >> CMakeLists.txt
    mkdir build
    cd build/
    cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=OFF -DADIOS_DIR=/root/adios-1.13.1/build  ..
