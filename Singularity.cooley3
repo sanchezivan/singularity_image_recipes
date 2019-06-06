@@ -46,6 +46,8 @@ From: centos
    yum install -y freeglut-devel
    cmake  -DVTK_BUILD_TESTING:STRING=OFF ../VTK
    make
+   cp vtk-config.cmake VTKConfig.cmake
+   cd ..
    
    # install MPICH
    wget -q http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz
