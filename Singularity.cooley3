@@ -45,9 +45,9 @@ From: centos
    yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
    yum install -y libXt-devel
    yum install -y freeglut-devel
-   cmake  -DVTK_BUILD_TESTING:STRING=OFF ../VTK
+   cmake  -DVTK_BUILD_TESTING:STRING=OFF -DCMAKE_INSTALL_PREFIX=/root/VTK-build ../VTK
    make
-   cp vtk-config.cmake VTKConfig.cmake
+   make install 
    cd ..
    
    # install MPICH
