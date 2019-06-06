@@ -14,9 +14,7 @@ From: centos
    # copy the hello world example from the github to 
    # the app directory
    # cp /hello_world.cpp ${SINGULARITY_ROOTFS}/myapp/
-   mkdir ${SINGULARITY_ROOTFS}/config
-   cp adiosconfig ${SINGULARITY_ROOTFS}/config/adiosconfig
- 
+   
 %post
    # post is run after entering the container env. 
    
