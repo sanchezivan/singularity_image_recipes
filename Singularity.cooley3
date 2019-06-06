@@ -99,7 +99,7 @@ From: centos
    cd sensei/
    mkdir build
    cd build/
-   cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=OFF -DADIOS_DIR=/root/adios-1.13.1/build -DENABLE_libIS=OFF -DENABLE_PARALLEL3D=OFF -DENABLE_OSCILLATORS=ON -DENABLES_MANDEBROT=OFF -DENABLE_VORTEX=OFF ..
+   cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=/root/VTK-build -DADIOS_DIR=/root/adios-1.13.1/build  ..
    make 
    make install
 
