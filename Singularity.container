@@ -13,18 +13,26 @@ From: centos
    #
    # copy the hello world example from the github to 
    # the app directory
+   # cp /hello_world.cpp ${SINGULARITY_ROOTFS}/myapp/
+   
+   # silvio
+   # why this?
+   #mkdir ${SINGULARITY_ROOTFS}/config
+
+   # silvio
+   # do we need this line?
+   #cp adiosconfig ${SINGULARITY_ROOTFS}/config/adiosconfig
+
 
 %post
    # post is run after entering the container env. 
 
-   # silvio
    # directory structure:
    # /sensei
    # /sensei/build
    # /sensei/src
    # /sensei/install
 
-   # silvio
    # build directory structure
    mkdir /sensei
    mkdir /sensei/build
@@ -37,10 +45,10 @@ From: centos
    yum update -y
    yum groupinstall -y "Development Tools"
    yum install -y gcc g++
-   yum install sudo -y
+   yum install -y sudo
    yum install -y ncurses-devel
    yum install -y wget
-   yum install  xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps -y
+   yum install -y xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps 
    yum install -y libXt-devel
    yum install -y freeglut-devel
    yum install -y automake
@@ -51,53 +59,55 @@ From: centos
  
    cd /sensei/src
    wget https://cmake.org/files/v3.12/cmake-3.12.3.tar.gz
-   tar zxvf cmake-3.*
+   tar xzf cmake-3.12.3.tar.gz
    rm cmake-3.12.3.tar.gz
    cd cmake-3.12.3
    ./bootstrap --prefix=/sensei/install/cmake
-   make -j4
+   make -j8
    make install
 
-   # add all the binaries we will build to the path
+   # add cmake binaries to the path
    export PATH=/sensei/install/cmake/bin:$PATH
+
+
+   # MPICH
+   
+   cd /sensei/src
+   wget -q http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz
+   tar xzf mpich-3.2.1.tar.gz
+   rm mpich-3.2.1.tar.gz
+   
+   cd mpich-3.2.1
+   # disable the addition of the RPATH to compiled executables
+   # this allows us to override the MPI libraries to use those
+   # found via LD_LIBRARY_PATH
+   ./configure --prefix=/usr/local/mpich/install --disable-wrapper-rpath
+   make -j8 
+   make install
+   # add to local environment
+   export PATH=/usr/local/mpich/install/bin:$PATH
+   export LD_LIBRARY_PATH=/usr/local/mpich/install/lib:$LD_LIBRARY_PATH
 
    
    # VTK
 
    cd /sensei/src
-   git clone https://gitlab.kitware.com/vtk/vtk.git
-   cd vtk
-   git checkout v8.2.0
+   wget https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz
+   tar xzf VTK-8.2.0.tar.gz
+   rm VTK-8.2.0.tar.gz
 
    cd /sensei/build
    mkdir vtk
    cd vtk
 
    cmake \
- 	-DVTK_BUILD_TESTING:STRING=OFF \
-	-DCMAKE_INSTALL_PREFIX=/sensei/install/vtk \
-   /sensei/src/vtk 
+     -DCMAKE_INSTALL_PREFIX=/sensei/install/vtk \
+   /sensei/src/VTK-8.2.0
    
-   make -j4
+   make -j8
    make install 
 
    
-   # MPICH
-   
-   cd /sensei/src
-   wget -q http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz
-   tar xf mpich-3.2.1.tar.gz
-   rm mpich-3.2.1.tar.gz
-   cd mpich-3.2.1
-   # disable the addition of the RPATH to compiled executables
-   # this allows us to override the MPI libraries to use those
-   # found via LD_LIBRARY_PATH
-   ./configure --prefix=/usr/local/mpich/install --disable-wrapper-rpath
-   make -j4 
-   make install
-   # add to local environment to build pi.c
-   export PATH=$PATH:/usr/local/mpich/install/bin
-   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/mpich/install/lib
 
           
    # ADIOS
@@ -131,35 +141,31 @@ From: centos
    #make
    #make install
    
-   # Installing SENSEI
+   # SENSEI
 
    cd /sensei/src
-   git clone https://github.com/Kitware/sensei.git
+   git clone https://gitlab.kitware.com/sensei/sensei.git
+   cd sensei
+   git checkout v2.1.1
 
    cd /sensei/build
    mkdir sensei
    cd sensei
 
-   #echo "set_property(TARGET parallel3d PROPERTY C_STANDARD 99)" >> CMakeLists.txt
-   #mkdir build
-   #cd build/
-   
    #cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=OFF -DADIOS_DIR=/root/adios-1.13.1/build  ..
 
    cmake \
-	-DENABLE_SENSEI=ON \
-	-DCMAKE_INSTALL_PREFIX=/sensei/install/sensei \
-	-DVTK_DIR=/sensei/install/vtk/lib/cmake/vtk-8.2 \
+     -DENABLE_SENSEI=ON \
+     -DENABLE_PARALLEL3D=OFF \
+     -DENABLE_VTK_IO=ON \
+     -DENABLE_VTK_MPI=OFF \
+     -DCMAKE_INSTALL_PREFIX=/sensei/install/sensei \
+     -DVTK_DIR=/sensei/install/vtk/lib64/cmake/vtk-8.2 \
    /sensei/src/sensei
  
-   make -j4
+   make -j8
    make install
 
-      # enter directory where source file was copied
-   #cd /myapp
-   
-   # build
-   # g++ -o hello_world hello_world.cpp
 
 %runscript
    # run script
@@ -172,6 +178,6 @@ From: centos
    # the previous 'post' section of the recipe file
    # so, if you need them, define them there as well
    
-   #export PATH=/usr/local/mpich/install/bin/:${PATH}
-   #export LD_LIBRARY_PATH=/usr/local/mpich/install/lib/:${LD_LIBRARY_PATH}
+   export PATH=/usr/local/mpich/install/bin/:${PATH}
+   export LD_LIBRARY_PATH=/usr/local/mpich/install/lib/:${LD_LIBRARY_PATH}
    #export PATH=$PATH:/myapp
