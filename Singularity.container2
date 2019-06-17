@@ -106,9 +106,34 @@ From: centos
    
    make -j8
    make install 
-
    
+   
+   # SENSEI
 
+   cd /sensei/src
+   git clone https://gitlab.kitware.com/sensei/sensei.git
+   cd sensei
+   git checkout v2.1.1
+
+   cd /sensei/build
+   mkdir sensei
+   cd sensei
+
+   #cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=OFF -DADIOS_DIR=/root/adios-1.13.1/build  ..
+
+   cmake \
+     -DENABLE_SENSEI=ON \
+     -DENABLE_PARALLEL3D=OFF \
+     -DENABLE_VTK_IO=ON \
+     -DENABLE_VTK_MPI=OFF \
+     -DCMAKE_INSTALL_PREFIX=/sensei/install/sensei \
+     -DVTK_DIR=/sensei/install/vtk/lib64/cmake/vtk-8.2 \
+   /sensei/src/sensei
+ 
+   make -j8
+   make install
+   
+   
           
    # ADIOS
    # Silvio
@@ -139,31 +164,6 @@ From: centos
    cd build
    ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
    make
-   make install
-   
-   # SENSEI
-
-   cd /sensei/src
-   git clone https://gitlab.kitware.com/sensei/sensei.git
-   cd sensei
-   git checkout v2.1.1
-
-   cd /sensei/build
-   mkdir sensei
-   cd sensei
-
-   #cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=OFF -DADIOS_DIR=/root/adios-1.13.1/build  ..
-
-   cmake \
-     -DENABLE_SENSEI=ON \
-     -DENABLE_PARALLEL3D=OFF \
-     -DENABLE_VTK_IO=ON \
-     -DENABLE_VTK_MPI=OFF \
-     -DCMAKE_INSTALL_PREFIX=/sensei/install/sensei \
-     -DVTK_DIR=/sensei/install/vtk/lib64/cmake/vtk-8.2 \
-   /sensei/src/sensei
- 
-   make -j8
    make install
 
 
