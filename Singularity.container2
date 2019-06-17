@@ -139,7 +139,7 @@ From: centos
    # Silvio
    # no adios for now
 
-   cd ${SINGULARITY_ROOTFS}/sensei/src
+   cd /sensei/src
    wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
    tar zxf adios-1.13.1.tar.gz
    
