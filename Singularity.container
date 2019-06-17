@@ -114,32 +114,32 @@ From: centos
    # Silvio
    # no adios for now
 
-   #cd ${SINGULARITY_ROOTFS}/sensei/src
-   #wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
-   #tar zxf adios-1.13.1.tar.gz
+   cd ${SINGULARITY_ROOTFS}/sensei/src
+   wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
+   tar zxf adios-1.13.1.tar.gz
    
-   #cd adios-1.13.1
-   #wget http://ftp.gnu.org/gnu/automake/automake-1.13.tar.gz
-   #tar xf automake-1.13.tar.gz
-   #cd automake-1.13
-   #./configure
-   #make
-   #make install
-   #cd ..
+   cd adios-1.13.1
+   wget http://ftp.gnu.org/gnu/automake/automake-1.13.tar.gz
+   tar xf automake-1.13.tar.gz
+   cd automake-1.13
+   ./configure
+   make
+   make install
+   cd ..
    
    # This installs MXML (needed to complete ADIOS installation)
-   #wget https://github.com/michaelrsweet/mxml/releases/download/release-2.9/mxml-2.9.tar.gz
-   #tar xf mxml-2.9.tar.gz
-   #cd mxml-2.9
-   #./configure
-   #make
-   #make install
-   #cd ..
-   #mkdir build
-   #cd build
-   #../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
-   #make
-   #make install
+   wget https://github.com/michaelrsweet/mxml/releases/download/release-2.9/mxml-2.9.tar.gz
+   tar xf mxml-2.9.tar.gz
+   cd mxml-2.9
+   ./configure
+   make
+   make install
+   cd ..
+   mkdir build
+   cd build
+   ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
+   make
+   make install
    
    # SENSEI
 
