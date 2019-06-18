@@ -53,6 +53,7 @@ From: centos
    yum install -y freeglut-devel
    yum install -y automake
    yum install -y vim
+   yum install -y mlocate
 
 
    # CMake 3.12.3
@@ -165,6 +166,8 @@ From: centos
    ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
    make
    make install
+   
+   updatedb
 
 
 %runscript
