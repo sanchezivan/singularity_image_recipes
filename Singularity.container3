@@ -142,7 +142,6 @@ From: centos
    yum install -y epel-release
    yum install -y mxml-devel
    cd ..
-   mkdir build
    cd build
    ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
    make
