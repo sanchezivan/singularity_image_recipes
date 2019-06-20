@@ -45,6 +45,7 @@ From: centos
    yum install -y freeglut-devel
    yum install -y vim
    yum install -y mlocate
+   yum install -y automake
 
 
 
@@ -81,6 +82,18 @@ From: centos
    export PATH=/usr/local/mpich/install/bin:$PATH
    export LD_LIBRARY_PATH=/usr/local/mpich/install/lib:$LD_LIBRARY_PATH
 
+
+   # ADIOS
+  
+   cd /sensei/src
+   wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
+   tar zxf adios-1.13.1.tar.gz
+   
+   cd adios-1.13.1
+   ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
+   make
+   make install
+
    
    # VTK
 
@@ -112,10 +125,9 @@ From: centos
    mkdir sensei
    cd sensei
 
-   #cmake -DENABLE_SENSEI=ON -DENABLE_ADIOS=ON -DVTK_DIR=OFF -DADIOS_DIR=/root/adios-1.13.1/build  ..
-
    cmake \
      -DENABLE_SENSEI=ON \
+     -DENABLE_ADIOS=ON \
      -DENABLE_PARALLEL3D=OFF \
      -DENABLE_VTK_IO=ON \
      -DENABLE_VTK_MPI=OFF \
@@ -126,25 +138,6 @@ From: centos
    make -j8
    make install
    
-   
-          
-   # ADIOS
-  
-   cd /sensei/src
-   wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
-   tar zxf adios-1.13.1.tar.gz
-   
-   cd adios-1.13.1
-   yum install -y automake
-   
-   # This installs MXML (needed to complete ADIOS installation)
-   yum install -y epel-release
-   yum install -y mxml-devel
-   mkdir build
-   cd build
-   ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
-   make
-   make install
    
    updatedb
 
