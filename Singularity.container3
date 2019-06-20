@@ -88,8 +88,10 @@ From: centos
    cd /sensei/src
    wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
    tar zxf adios-1.13.1.tar.gz
-   
    cd adios-1.13.1
+   mkdir build
+   cd build
+   ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
    make
    make install
 
