@@ -90,7 +90,6 @@ From: centos
    tar zxf adios-1.13.1.tar.gz
    
    cd adios-1.13.1
-   ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
    make
    make install
 
