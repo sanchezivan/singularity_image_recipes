@@ -145,13 +145,7 @@ From: centos
    tar zxf adios-1.13.1.tar.gz
    
    cd adios-1.13.1
-   wget http://ftp.gnu.org/gnu/automake/automake-1.13.tar.gz
-   tar xf automake-1.13.tar.gz
-   cd automake-1.13
-   ./configure
-   make
-   make install
-   cd ..
+   yum install -y automake
    
    # This installs MXML (needed to complete ADIOS installation)
    wget https://github.com/michaelrsweet/mxml/releases/download/release-2.9/mxml-2.9.tar.gz
