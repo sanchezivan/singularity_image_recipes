@@ -88,6 +88,7 @@ From: centos
    cd /sensei/src
    wget https://users.nccs.gov/~pnorbert/adios-1.13.1.tar.gz
    tar zxf adios-1.13.1.tar.gz
+   rm -f adios-1.13.1.tar.gz
    cd adios-1.13.1
    mkdir build
    cd build
@@ -128,13 +129,16 @@ From: centos
 
    cmake \
      -DENABLE_SENSEI=ON \
-     -DENABLE_ADIOS=ON \
      -DENABLE_PARALLEL3D=OFF \
      -DENABLE_VTK_IO=ON \
      -DENABLE_VTK_MPI=OFF \
      -DCMAKE_INSTALL_PREFIX=/sensei/install/sensei \
      -DVTK_DIR=/sensei/install/vtk/lib64/cmake/vtk-8.2 \
    /sensei/src/sensei
+   
+   cmake \
+     -DENABLE_ADIOS=ON \
+   /sensei/src/adios-1.13.1
    
    make -j8
    make install
