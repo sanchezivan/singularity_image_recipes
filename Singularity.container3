@@ -138,7 +138,7 @@ From: centos
    
    cmake \
      -DENABLE_ADIOS=ON \
-   /sensei/src/adios-1.13.1
+   /sensei/src/adios-1.13.1/build
    
    make -j8
    make install
