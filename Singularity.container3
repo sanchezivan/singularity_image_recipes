@@ -136,6 +136,11 @@ From: centos
      -DVTK_DIR=/sensei/install/vtk/lib64/cmake/vtk-8.2 \
    /sensei/src/sensei
    
+   make -j8
+   make install
+   
+   cd /sensei/src/adios-1.13.1/build 
+   
    cmake \
      -DENABLE_ADIOS=ON \
    /sensei/src/adios-1.13.1/build
