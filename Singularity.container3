@@ -139,14 +139,14 @@ From: centos
    make -j8
    make install
    
-  # cd /sensei/src/adios-1.13.1/utils
+   cd /sensei/src/adios-1.13.1/utils
    
-  # cmake \
-  #  -DENABLE_ADIOS=ON \
+   cmake \
+    -DENABLE_ADIOS=ON \
    
    
-  # make -j8
-  # make install
+   make -j8
+   make install
    
    
    updatedb
