@@ -92,7 +92,7 @@ From: centos
    cd adios-1.13.1
    mkdir build
    cd build
-   ../configure -prefix=/root/adios-1.13.1/build CFLAGS="-fPIC"
+   ../configure -prefix=/sensei/install/adios CFLAGS="-fPIC"
    make
    make install
 
@@ -129,25 +129,17 @@ From: centos
 
    cmake \
      -DENABLE_SENSEI=ON \
+     -DENABLE_ADIOS=ON \
      -DENABLE_PARALLEL3D=OFF \
      -DENABLE_VTK_IO=ON \
      -DENABLE_VTK_MPI=OFF \
      -DCMAKE_INSTALL_PREFIX=/sensei/install/sensei \
      -DVTK_DIR=/sensei/install/vtk/lib64/cmake/vtk-8.2 \
+     -DADIOS_DIR=/sensei/install/adios \
    /sensei/src/sensei
    
    make -j8
    make install
-   
-   cd /sensei/src/adios-1.13.1/utils
-   
-   cmake \
-    -DENABLE_ADIOS=ON \
-   
-   
-   make -j8
-   make install
-   
    
    updatedb
 
